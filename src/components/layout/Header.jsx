@@ -13,6 +13,7 @@ import {
   IconButton,
   useScrollTrigger,
   Slide,
+  alpha,
   useTheme,
   useMediaQuery
 } from '@mui/material'
@@ -46,6 +47,16 @@ const Header = () => {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
+  }
+
+  const handleLogin = () => {
+    navigate('/login') // Updated to /login
+    setMobileOpen(false)
+  }
+
+  const handleApplyNow = () => {
+    navigate('/apply') // Navigates to application page
+    setMobileOpen(false)
   }
 
   const menuItems = [
@@ -123,6 +134,7 @@ const Header = () => {
           fullWidth
           variant="outlined"
           startIcon={<LoginIcon />}
+          onClick={handleLogin} // This now uses handleLogin which navigates to /login
           sx={{
             borderColor: 'rgba(255,255,255,0.3)',
             color: 'white',
@@ -140,6 +152,7 @@ const Header = () => {
           fullWidth
           variant="contained"
           startIcon={<PersonAddIcon />}
+          onClick={handleApplyNow}
           sx={{
             background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
             py: 1.2,
@@ -149,7 +162,6 @@ const Header = () => {
             },
             transition: 'all 0.3s ease'
           }}
-          onClick={() => navigate('/admissions')}
         >
           Apply Now
         </Button>
@@ -253,6 +265,7 @@ const Header = () => {
                 <Button
                   variant="text"
                   startIcon={<LoginIcon />}
+                  onClick={handleLogin} // This now uses handleLogin which navigates to /login
                   sx={{
                     color: 'white',
                     '&:hover': {
@@ -260,13 +273,13 @@ const Header = () => {
                       background: 'rgba(37, 99, 235, 0.1)'
                     }
                   }}
-                  onClick={() => navigate('/login')}
                 >
                   Login
                 </Button>
                 <Button
                   variant="contained"
                   startIcon={<PersonAddIcon />}
+                  onClick={handleApplyNow}
                   sx={{
                     background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
                     px: 3,
@@ -277,7 +290,6 @@ const Header = () => {
                     },
                     transition: 'all 0.3s ease'
                   }}
-                  onClick={() => navigate('/admissions')}
                 >
                   Apply Now
                 </Button>
@@ -305,7 +317,7 @@ const Header = () => {
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true,
+          keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
           display: { xs: 'block', md: 'none' },
